@@ -58,6 +58,10 @@ class IssuesServer {
 
   addIssue(req, res) {
     const newIssue = req.body
+    // Find the max current id and add 1 to it.
+    const maxId = Math.max(...this.issues.map((issue) => issue.id), 0)
+    newIssue.id = maxId + 1
+    
     this.issues.push(newIssue)
     res.status(201).json(this.issues)
   }
