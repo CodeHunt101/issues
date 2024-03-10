@@ -33,13 +33,13 @@ class IssuesClientCLI {
       .action(this.getIssue.bind(this))
 
     program
-      .command('add-issue <title> <author>')
+      .command('add-issue <title> <description>')
       .alias('add')
       .description('Add a new issue')
       .action(this.addIssue.bind(this))
 
     program
-      .command('update-issue <id> <title> <author>')
+      .command('update-issue <id> <title> <description>')
       .alias('update')
       .description('Update a issue by ID')
       .action(this.updateIssue.bind(this))

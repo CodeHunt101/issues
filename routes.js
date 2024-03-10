@@ -34,6 +34,7 @@ class Routes {
     const issue = this.issuesData.getIssueById(issueId)
 
     if (issue) {
+      console.log(`Issue with ID ${issueId} retrieved`)
       res.json(issue)
     } else {
       res.status(404).json({ message: 'Issue not found' })
@@ -43,6 +44,7 @@ class Routes {
   addIssue(req, res) {
     const newIssue = req.body
     this.issuesData.addIssue(newIssue)
+    console.log('Issue added successfully')
     const issues = this.issuesData.getIssues()
     res.status(201).json(issues)
   }
@@ -52,12 +54,14 @@ class Routes {
     const updatedIssue = req.body
 
     this.issuesData.updateIssue(issueId, updatedIssue)
+    console.log(`Issue with ID ${issueId} updated successfully`)
     res.json(updatedIssue)
   }
 
   deleteIssue(req, res) {
     const issueId = parseInt(req.params.id)
     this.issuesData.deleteIssue(issueId)
+    console.log(`Issue with ID ${issueId} deleted successfully`)
     res.json({ message: 'Issue deleted successfully' })
   }
 }
