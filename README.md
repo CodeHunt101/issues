@@ -2,6 +2,8 @@
 
 Make sure to execute `npm install` to install all the dependencies.
 
+Run `npm start` from the root directory to run the server. By default it utilises port 3000.
+
 To execute commands, in the CLI you must run from the root directory:
 
 ```
