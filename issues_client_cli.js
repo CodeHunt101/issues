@@ -69,11 +69,11 @@ class IssuesClientCLI {
     }
   }
 
-  async addIssue(title, author) {
+  async addIssue(title, description) {
     try {
       const response = await axios.post(`${this.serverURL}/issues`, {
         title,
-        author,
+        description,
       })
       console.log('Issue added successfully:', response.data)
     } catch (error) {
@@ -81,11 +81,11 @@ class IssuesClientCLI {
     }
   }
 
-  async updateIssue(id, title, author) {
+  async updateIssue(id, title, description) {
     try {
       const response = await axios.put(`${this.serverURL}/issues/${id}`, {
         title,
-        author,
+        description,
       })
       console.log('Issue updated successfully:', response.data)
     } catch (error) {
