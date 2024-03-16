@@ -54,15 +54,4 @@ Example:
 node issues_client_cli delete-issue 1
 ```
 
-## Opportunities for improvement:
-
-I could not go through these on the loom recording but I hope leaving it on the Readme helps:
-
-- Handle some validation errors from the server
-- Store issues in a database
-- Add unit tests to ensure expected behaviour of the app
-- Make the CLI more interactive
-- Refactor some function snippets to make it more reusable
-- Reorganise folders for better modularisation
-
 Thank you!
