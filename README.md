@@ -7,7 +7,7 @@ Run `npm start` from the root directory to run the server. By default it utilise
 To execute commands, in the CLI you must run from the root directory:
 
 ```
-node issues_client_cli <command>
+node dist/client/run <command>
 ```
 
 ## Commands:
@@ -15,43 +15,43 @@ node issues_client_cli <command>
 ### List all issues:
 
 ```
-node issues_client_cli list-issues
+node dist/client/run list-issues
 ```
 
 ### Read an issue:
 ```
-node issues_client_cli get-issue <id>
+node dist/client/run get-issue <id>
 ```
 Example:
 ```
-node issues_client_cli get-issue 1
+node dist/client/run get-issue 1
 ```
 
 ### Add an issue:
 ```
-node issues_client_cli add-issue <title> <description>
+node dist/client/run add-issue <title> <description>
 ```
 Example:
 ```
-node issues_client_cli add-issue "new title" "new description"
+node dist/client/run add-issue "new title" "new description"
 ```
 
 ### Update an issue:
 ```
-node issues_client_cli update-issue <id> <title> <description>
+node dist/client/run update-issue <id> <title> <description>
 ```
 Example:
 ```
-node issues_client_cli update-issue 1 "updated title" "updated description"
+node dist/client/run update-issue 1 "updated title" "updated description"
 ```
 
 ### Delete an issue:
 ```
-node issues_client_cli delete-issue <id>
+node dist/client/run delete-issue <id>
 ```
 Example:
 ```
-node issues_client_cli delete-issue 1
+node dist/client/run delete-issue 1
 ```
 
 Thank you!
