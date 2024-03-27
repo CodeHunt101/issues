@@ -1,12 +1,16 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const dotenv = require('dotenv')
-const Routes = require('./routes')
-const IssuesData = require('./issues_data')
+import express, { Express, Request, Response } from "express";
+import bodyParser from 'body-parser'
+import dotenv from 'dotenv'
+import {Routes} from './routes'
+import {IssuesData} from './issues_data'
 
 dotenv.config()
 
 class IssuesServer {
+  app: Express
+  port: string | number
+  issuesData: IssuesData
+  routes: Routes
   constructor() {
     this.app = express()
     this.port = process.env.PORT || 3000

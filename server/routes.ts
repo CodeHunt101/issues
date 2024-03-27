@@ -1,7 +1,11 @@
-const express = require('express')
+import express, { Express, Request, Response, Router } from "express";
+import { IssuesData } from "./issues_data";
 
-class Routes {
-  constructor(issuesData) {
+export class Routes {
+  router: Router;
+  app: Express;
+  issuesData: IssuesData;
+  constructor(issuesData: IssuesData) {
     this.router = express.Router()
     this.app = express()
     this.issuesData = issuesData
@@ -19,17 +23,17 @@ class Routes {
     this.router.put('/issues/:id', this.updateIssue.bind(this))
     this.router.delete('/issues/:id', this.deleteIssue.bind(this))
 
-    this.router.use((err, req, res, next) => {
+    this.router.use((err: any, req: Request, res: Response) => {
       console.error(err.stack)
       res.status(500).json({ message: 'Internal Server Error' })
     })
   }
 
-  getIssues(_, res) {
+  getIssues(_:Request, res: Response) {
     res.json(this.issuesData.getIssues())
   }
 
-  getIssueById(req, res) {
+  getIssueById(req: Request, res: Response) {
     const issueId = parseInt(req.params.id)
     const issue = this.issuesData.getIssueById(issueId)
 
@@ -41,7 +45,7 @@ class Routes {
     }
   }
 
-  addIssue(req, res) {
+  addIssue(req: Request, res: Response) {
     const newIssue = req.body
     this.issuesData.addIssue(newIssue)
     console.log('Issue added successfully')
@@ -49,7 +53,7 @@ class Routes {
     res.status(201).json(issues)
   }
 
-  updateIssue(req, res) {
+  updateIssue(req: Request, res: Response) {
     const issueId = parseInt(req.params.id)
     const updatedIssue = req.body
 
@@ -58,7 +62,7 @@ class Routes {
     res.json(updatedIssue)
   }
 
-  deleteIssue(req, res) {
+  deleteIssue(req: Request, res: Response) {
     const issueId = parseInt(req.params.id)
     this.issuesData.deleteIssue(issueId)
     console.log(`Issue with ID ${issueId} deleted successfully`)
@@ -66,4 +70,3 @@ class Routes {
   }
 }
 
-module.exports = Routes

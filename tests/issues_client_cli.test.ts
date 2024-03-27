@@ -1,6 +1,6 @@
-const axios = require('axios')
-const IssuesClientCLI = require('../client/issues_client_cli')
-const { Command } = require('commander')
+import axios from 'axios'
+import {IssuesClientCLI} from '../client/issues_client_cli'
+import { Command } from 'commander'
 
 
 describe('IssuesClientCLI', () => {
@@ -13,7 +13,6 @@ describe('IssuesClientCLI', () => {
       ],
     }
     jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponse)
-    axios.get.mockResolvedValueOnce(mockResponse)
     const consoleLogSpy = jest.spyOn(console, 'log')
     const customProgram = new Command()
     const issuesClientCLI = new IssuesClientCLI(['', '', 'list-issues'], customProgram) // Create instance after mocking argv
@@ -31,12 +30,11 @@ describe('IssuesClientCLI', () => {
       data: { id: 1, title: 'Test Issue 1', description: 'Test Description 1' },
     }
     jest.spyOn(axios, 'get').mockResolvedValueOnce(mockResponse)
-    axios.get.mockResolvedValueOnce(mockResponse)
     const consoleLogSpy = jest.spyOn(console, 'log')
 
     const customProgram = new Command()
     const issuesClientCLI = new IssuesClientCLI(['', '', 'get-issue', '1'], customProgram) // Create instance after mocking argv
-    await issuesClientCLI.getIssue('1')
+    await issuesClientCLI.getIssue(1)
 
     expect(axios.get).toHaveBeenCalledWith('http://localhost:3000/issues/1')
     expect(consoleLogSpy).toHaveBeenCalledWith(

@@ -1,9 +1,12 @@
-const axios = require('axios')
-const { Command } = require('commander')
-const program = new Command()
+import axios from 'axios';
+import { Command } from 'commander';
+const program = new Command();
 
-class IssuesClientCLI {
-  constructor(args, myProgram = program) {
+export class IssuesClientCLI {
+  serverURL: string;
+  program: Command;
+  
+  constructor(args: string[] | undefined = undefined, myProgram = program) {
     this.serverURL = 'http://localhost:3000'
     this.program = myProgram
     this.program
@@ -57,52 +60,50 @@ class IssuesClientCLI {
     try {
       const response = await axios.get(`${this.serverURL}/issues`)
       console.log('List of issues:', response.data)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching issues:', error.message)
     }
   }
 
-  async getIssue(id) {
+  async getIssue(id: number) {
     try {
       const response = await axios.get(`${this.serverURL}/issues/${id}`)
       console.log('Issue details:', response.data)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching issue:', error.message)
     }
   }
 
-  async addIssue(title, description) {
+  async addIssue(title: string, description: string) {
     try {
       const response = await axios.post(`${this.serverURL}/issues`, {
         title,
         description,
       })
       console.log('Issue added successfully:', response.data)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error adding issue:', error.message)
     }
   }
 
-  async updateIssue(id, title, description) {
+  async updateIssue(id: number, title: string, description: string) {
     try {
       const response = await axios.put(`${this.serverURL}/issues/${id}`, {
         title,
         description,
       })
       console.log('Issue updated successfully:', response.data)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error updating issue:', error.message)
     }
   }
 
-  async deleteIssue(id) {
+  async deleteIssue(id: number) {
     try {
       const response = await axios.delete(`${this.serverURL}/issues/${id}`)
       console.log(response.data.message)
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error deleting issue:', error.message)
     }
   }
 }
-
-module.exports = IssuesClientCLI
