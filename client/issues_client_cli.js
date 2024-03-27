@@ -1,50 +1,52 @@
 const axios = require('axios')
-const { program } = require('commander')
+const { Command } = require('commander')
+const program = new Command()
 
 class IssuesClientCLI {
-  constructor(args) {
+  constructor(args, myProgram = program) {
     this.serverURL = 'http://localhost:3000'
-    program
+    this.program = myProgram
+    this.program
       .version('1.0.0')
       .description(
         'Issues CLI for interacting with the RESTful Node.js issues server'
       )
 
-    const commands = args ?? process.argv
+    const commands = args || process.argv
     this.setupCommands()
-    program.parse(commands)
+    this.program.parse(commands)
 
     if (!commands.slice(2).length) {
-      program.outputHelp()
+      this.program.outputHelp()
     }
   }
 
   setupCommands() {
-    program
+    this.program
       .command('list-issues')
       .alias('ls')
       .description('List all issues')
       .action(this.listIssues.bind(this))
 
-    program
+    this.program
       .command('get-issue <id>')
       .alias('get')
       .description('Get issue by ID')
       .action(this.getIssue.bind(this))
 
-    program
+    this.program
       .command('add-issue <title> <description>')
       .alias('add')
       .description('Add a new issue')
       .action(this.addIssue.bind(this))
 
-    program
+    this.program
       .command('update-issue <id> <title> <description>')
       .alias('update')
       .description('Update a issue by ID')
       .action(this.updateIssue.bind(this))
 
-    program
+    this.program
       .command('delete-issue <id>')
       .alias('delete')
       .description('Delete a issue by ID')
@@ -102,7 +104,5 @@ class IssuesClientCLI {
     }
   }
 }
-
-const issuesClientCLI = new IssuesClientCLI()
 
 module.exports = IssuesClientCLI
